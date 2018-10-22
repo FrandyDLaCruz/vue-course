@@ -11,8 +11,11 @@
 
 <body>
     <div id="app">
-        <button v-on:click="increase(2, $event)">Click me</button>
-        <p>{{ counter }}</p>
+        <button v-on:click="counter++">Increase</button>
+        <button v-on:click="counter--">Decrease</button>
+        <button v-on:click="secondCounter++">Second Increase</button>
+        <p>Counter: {{ counter }} | {{ secondCounter }}</p>
+        <p>Result: {{ result() }} | {{ output }}</p>
         <p v-on:mousemove="updateCoordinates">
             Coodinates: {{ x }} / {{ y }}
             <!-- - <span v-on:mousemove="deadSpot">DEAD SPOT</span> -->
@@ -29,7 +32,22 @@
             counter: 0,
             x: 0,
             y: 0,
-            text: ''
+            text: '',
+            secondCounter: 0
+        },
+        computed: {     //Only updates when the values it is working with change (secondCounter in this case)
+            output: function() {
+                console.log('From Computed');
+                return this.secondCounter > 5 ? 'Greater than 5' : 'Smaller than 5';
+            }
+        },
+        watch: {        //Watch a specified property to do something (when the specified property changes it will get executed)
+            counter: function(value) {
+                let vm = this;      //To access the global properties, coz in this deepness the scope is lost
+                setTimeout(function(){
+                    vm.counter = 0;
+                }, 2000);
+            }
         },
         methods: {
             increase: function (increaser, event) {
@@ -44,6 +62,10 @@
             },
             writeContent: function (event) {
                 this.text = event.target.value;
+            },
+            result: function() {
+                console.log('From Methods');
+                return this.counter > 5 ? 'Greater than 5' : 'Smaller than 5';
             }
         }
     });
