@@ -42,7 +42,7 @@
     <section class="row log" v-if="log.length > 0">
         <div class="small-12 columns">
             <ul>
-                <li v-for="(action, index) in log" :class="index % 2 ? 'monster-turn' : 'player-turn'">
+                <li v-for="(action, index) in log" :class="index % 2 ? 'player-turn' : 'monster-turn'">
                     {{ action }}
                 </li>
             </ul>

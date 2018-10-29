@@ -4,9 +4,7 @@ new Vue({
         gameStarted: false,
         userHealth: 100,
         monsterHealth: 100,
-        log: [],
-        userAttack: 0,
-        monsterAttack: 0
+        log: []
     },
     watch: {
         userHealth: function(life) {
@@ -24,31 +22,31 @@ new Vue({
     },
     methods: {
         attack: function() {
-            this.userAttack = this.getRandom(10);
-            this.monsterAttack = this.getRandom(10);
-            this.userHealth -= this.monsterAttack;
-            this.monsterHealth -= this.userAttack;
+            let userAttack = this.getRandom(0, 10);
+            let monsterAttack = this.getRandom(0, 10);
+            this.userHealth -= monsterAttack;
+            this.monsterHealth -= userAttack;
 
-            this.log.unshift("Player hits Monster for " + this.userAttack);
-            this.log.unshift("Monster hits Player for " + this.monsterAttack); 
+            this.log.unshift("Player hits Monster for " + userAttack);
+            this.log.unshift("Monster hits Player for " + monsterAttack); 
         },
         specialAttack: function() {
-            this.userAttack = this.getRandom(20);
-            this.monsterAttack = this.getRandom(10);
-            this.userHealth -= this.monsterAttack;
-            this.monsterHealth -= this.userAttack;
+            let userAttack = this.getRandom(10, 20);
+            let monsterAttack = this.getRandom(0, 10);
+            this.userHealth -= monsterAttack;
+            this.monsterHealth -= userAttack;
 
-            this.log.unshift("Player hits Monster for " + this.userAttack);
-            this.log.unshift("Monster hits Player for " + this.monsterAttack);
+            this.log.unshift("Player hits Monster for " + userAttack);
+            this.log.unshift("Monster hits Player for " + monsterAttack);
         },
         heal: function() {
-            this.userAttack = this.getRandom(10);
-            this.monsterAttack = this.getRandom(10);
-            this.userHealth += this.userAttack;
-            this.userHealth -= this.monsterAttack;
+            let userAttack = this.getRandom(0, 10);
+            let monsterAttack = this.getRandom(0, 10);
+            this.userHealth += userAttack;
+            this.userHealth -= monsterAttack;
 
-            this.log.unshift("Player heals himself for " + this.userAttack);
-            this.log.unshift("Monster hits Player for " + this.monsterAttack);
+            this.log.unshift("Player heals himself for " + userAttack);
+            this.log.unshift("Monster hits Player for " + monsterAttack);
         },
         endGame: function() {
             this.gameStarted = !this.gameStarted;
@@ -56,8 +54,8 @@ new Vue({
             this.monsterHealth = 100;
             this.log = [];
         },
-        getRandom: function(value) {
-            return Math.round(Math.random() * value);
+        getRandom: function(min, max) {
+            return Math.max(Math.round(Math.random() * max), min);
         }
     }
 });
