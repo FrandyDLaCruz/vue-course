@@ -19,3 +19,7 @@ Watch method watchs the changes on specific properties | Computed methods needs 
 ### HTML5 features
 
 `<template>` is a tag that doesn't show as text in the HTML and is usefull to group up certain code that has to be hidden like a div does.
+
+### Vue Life-Cycle
+
+![Vue LifeCycle](https://vuejs.org/images/lifecycle.png)
